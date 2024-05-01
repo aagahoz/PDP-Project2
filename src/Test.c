@@ -1,10 +1,14 @@
-#include "Kare.h"
+#include "Bitki.h"
 
 int main(){
 	
 	printf("\n");
 		
-	Kare k = KareOlustur(5);
+	Bitki k = BitkiOlustur(5);
+
+
+
+
 	char* str = k->super->gorunum(k->super,k);
 	printf("%s\n",str);
 	free(str);
