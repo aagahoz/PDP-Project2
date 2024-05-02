@@ -10,6 +10,8 @@
 struct CANLI{
 	int deger;
 	char* tur;
+	int xCoord;
+	int yCoord;
 
 	void (*setDeger)(struct CANLI*,int);
 	char* (*gorunum)(struct CANLI*,void*);

@@ -5,7 +5,9 @@ Canli CanliOlustur(int deger){
 	Canli this;
 	this = (Canli)malloc(sizeof(struct CANLI));
 	this->deger = deger;
-	this->tur = "X";
+	this->tur = "-";
+	this->xCoord = -1;
+	this->yCoord = -1;
 
 	this->setDeger = &setDeger;
 	this->gorunum = &gorunum;
@@ -24,7 +26,7 @@ char* gorunum(const Canli this,void* p){
 	int toplamUzunluk = 36;
 
 	char* str = (char*)malloc(sizeof(char)*toplamUzunluk+1);
-	sprintf(str,"\n Tur: %s\n\n",this->tur);
+	sprintf(str,"\n Tur: %s k:(%d, %d)",this->tur, this->xCoord, this->yCoord);
 	return str;
 }
 void CanliYoket(const Canli this){
