@@ -1,12 +1,14 @@
 #include "Bitki.h"
 #include "Bocek.h"
+#include "Sinek.h"
+#include "Pire.h"
 
 int main(){
 	
 	printf("\n");
 
-	Bocek k = BocekOlustur(5);
-	char* str = k->super->gorunum(k->super,k);
+	Pire k = PireOlustur(5);
+	char* str = k->super->super->gorunum(k->super->super,k);
 	printf("%s\n",str);
 	free(str);
 	
@@ -30,6 +32,15 @@ int main(){
 
 	Bocek k = BocekOlustur(5);
 	char* str = k->super->gorunum(k->super,k);
+	printf("%s\n",str);
+	free(str);
+	
+	k->yoket(k);
+
+
+
+	Sinek k = SinekOlustur(5);
+	char* str = k->super->super->gorunum(k->super->super,k);
 	printf("%s\n",str);
 	free(str);
 	
