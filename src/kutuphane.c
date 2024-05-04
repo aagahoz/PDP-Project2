@@ -82,12 +82,12 @@ void bellekSerbestBirak(int **matris, int satir_sayisi)
 }
 
 void printGrid(int bitkiIndex, int bocekIndex, int pireIndex, int sinekIndex,
-               Bitki bitkiler[], Bocek bocekler[], Pire pireler[], Sinek sinekler[])
+               Bitki bitkiler[], Bocek bocekler[], Pire pireler[], Sinek sinekler[], int satirSayisi, int sutunSayisi)
 {
     int i, j, k;
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < satirSayisi; i++)
     {
-        for (j = 0; j < 5; j++)
+        for (j = 0; j < sutunSayisi; j++)
         {
             int xCoord = i;
             int yCoord = j;
@@ -133,16 +133,16 @@ void printGrid(int bitkiIndex, int bocekIndex, int pireIndex, int sinekIndex,
 }
 
 void findWinner(int bitkiIndex, int bocekIndex, int pireIndex, int sinekIndex,
-                Bitki bitkiler[], Bocek bocekler[], Pire pireler[], Sinek sinekler[])
+                Bitki bitkiler[], Bocek bocekler[], Pire pireler[], Sinek sinekler[], int satirSayisi, int sutunSayisi)
 {
     int xEksen = -1;
     int yEksen = -1;
     char*  kazananTur;
     
     int i, j, k;
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < sutunSayisi; i++)
     {
-        for (j = 0; j < 5; j++)
+        for (j = 0; j < sutunSayisi; j++)
         {
             int xCoord = i;
             int yCoord = j;
