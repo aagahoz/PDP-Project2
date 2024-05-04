@@ -6,11 +6,9 @@
 
 int main()
 {
-	printf("\n");
-
+	printf("\n\n\n\n");
 	FILE *dosya;
 	dosya = fopen("src/Veri.txt", "r");
-
 	if (dosya == NULL)
 	{
 		printf("Dosya bulunamadı veya açılamadı.\n");
@@ -19,11 +17,8 @@ int main()
 
 	int satir_sayisi = 0;
 	int sutun_sayisi = 0;
-
 	int **matris = matrisOlustur(dosya, &satir_sayisi, &sutun_sayisi, MAX_SATIR_UZUNLUGU);
-
 	matrisiYazdir(matris, satir_sayisi, sutun_sayisi);
-
 	fclose(dosya);
 
 	printf("\n");
@@ -45,7 +40,6 @@ int main()
 		{
 			if (matris[i][j] >= 1 && matris[i][j] <= 9) // Bitki
 			{
-				// printf("B ");
 				bitkiler[bitkiIndex] = BitkiOlustur(matris[i][j]);
 				bitkiler[bitkiIndex]->super->xCoord = i;
 				bitkiler[bitkiIndex]->super->yCoord = j;
@@ -53,7 +47,6 @@ int main()
 			}
 			else if (matris[i][j] >= 10 && matris[i][j] <= 20) // Bocek
 			{
-				// printf("C ");
 				bocekler[bocekIndex] = BocekOlustur(matris[i][j]);
 				bocekler[bocekIndex]->super->xCoord = i;
 				bocekler[bocekIndex]->super->yCoord = j;
@@ -61,7 +54,6 @@ int main()
 			}
 			else if (matris[i][j] >= 21 && matris[i][j] <= 50) // Sinek
 			{
-				// printf("S ");
 				sinekler[sinekIndex] = SinekOlustur(matris[i][j]);
 				sinekler[sinekIndex]->super->super->xCoord = i;
 				sinekler[sinekIndex]->super->super->yCoord = j;
@@ -69,7 +61,6 @@ int main()
 			}
 			else if (matris[i][j] >= 51 && matris[i][j] <= 99) // Pire
 			{
-				// printf("P ");
 				pireler[pireIndex] = PireOlustur(matris[i][j]);
 				pireler[pireIndex]->super->super->xCoord = i;
 				pireler[pireIndex]->super->super->yCoord = j;
@@ -81,7 +72,7 @@ int main()
 			}
 		}
 	}
-
+	printf("---------Ilk Durum---------\n\n");
 	printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
 	printf("\n");
 
@@ -94,6 +85,10 @@ int main()
 	Pire tempPirePointer;
 	Sinek tempSinekPointer;
 	Bitki tempBitkiPointer;
+	// -----------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------
+	// YEME KISMI ------------------------------------------------------------------
+	printf("---------ADIMLAR-------\n\n");
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -108,7 +103,7 @@ int main()
 					char *durum = bitkiler[k]->super->tur;
 					if (!strcmp(durum, "B"))
 					{
-						printf("Bitki %d  %d \n", xCoord, yCoord);
+						// printf("Bitki %d  %d \n", xCoord, yCoord);
 						bulunanBitkiMi = 1;
 						tempBitkiPointer = bitkiler[k];
 						break;
@@ -123,7 +118,7 @@ int main()
 					char *durum = bocekler[k]->super->tur;
 					if (!strcmp(durum, "C"))
 					{
-						printf("Bocek %d  %d \n", xCoord, yCoord);
+						// printf("Bocek %d  %d \n", xCoord, yCoord);
 						bulunanBocekMi = 1;
 						tempBocekPointer = bocekler[k];
 						break;
@@ -138,7 +133,7 @@ int main()
 					char *durum = pireler[k]->super->super->tur;
 					if (!strcmp(durum, "P"))
 					{
-						printf("Pire %d  %d \n", xCoord, yCoord);
+						// printf("Pire %d  %d \n", xCoord, yCoord);
 						bulunanPireMi = 1;
 						tempPirePointer = pireler[k];
 						break;
@@ -153,7 +148,7 @@ int main()
 					char *durum = sinekler[k]->super->super->tur;
 					if (!strcmp(durum, "S"))
 					{
-						printf("Sinek %d  %d \n", xCoord, yCoord);
+						// printf("Sinek %d  %d \n", xCoord, yCoord);
 						bulunanSinekMi = 1;
 						tempSinekPointer = sinekler[k];
 						break;
@@ -161,27 +156,31 @@ int main()
 				}
 			}
 
-			printf("\n");
+			// printf("\n");
 			// -----------------------------------------------------------------------------
 			// -----------------------------------------------------------------------------
-			// -----------------------------------------------------------------------------
-
+			// YENECEK BULMA KISMI ---------------------------------------------------------
 			if (bulunanBitkiMi)
 			{
 				char *durum = tempBitkiPointer->super->tur;
 				int xKoordinat = tempBitkiPointer->super->xCoord;
 				int yKoordinat = tempBitkiPointer->super->yCoord;
 				int degeri = tempBitkiPointer->super->deger;
-				printf("Bulunan Bitkinin durumu: %s Konumu: %d %d degeri: %d \n", durum, xKoordinat, yKoordinat, degeri);
+				// printf("Bulunan Bitkinin durumu: %s Konumu: %d %d degeri: %d \n", durum, xKoordinat, yKoordinat, degeri);
 				bulunanBitkiMi = 0;
+
+				int bitkiYasiyorMu = 0;
+				if (strcmp(durum, "X"))
+				{
+					// printf("Bitki Yasiyor\n");
+					bitkiYasiyorMu = 1;
+				}
 
 				int icDongu = j + 1;
 				for (m = i; m < 4; m++)
 				{
 					for (n = icDongu; n < 5; n++)
 					{
-						// printf("m %d n %d -", m, n);
-
 						int xCoord = m;
 						int yCoord = n;
 						for (k = 0; k < bitkiIndex; k++)
@@ -192,10 +191,32 @@ int main()
 								if (!strcmp(durum, "B"))
 								{
 									int yenilecekDeger = bitkiler[k]->super->deger;
-									printf("Bitki Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									// printf("Bitki Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									int ilkDeger = tempBitkiPointer->super->deger;
+									int ikinciDeger = bitkiler[k]->super->deger;
+
+									if (ilkDeger > ikinciDeger)
+									{
+										bitkiler[k]->super->tur = "X";
+										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+									}
+									else
+									{
+										tempBitkiPointer->super->tur = "X";
+										bitkiYasiyorMu = 0;
+										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+									}
+									break;
+								}
+								if (bitkiYasiyorMu == 0)
+								{
 									break;
 								}
 							}
+						}
+						if (bitkiYasiyorMu == 0)
+						{
+							break;
 						}
 
 						for (k = 0; k < bocekIndex; k++)
@@ -206,10 +227,21 @@ int main()
 								if (!strcmp(durum, "C"))
 								{
 									int yenilecekDeger = bocekler[k]->super->deger;
-									printf("Bocek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									// printf("Bocek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									tempBitkiPointer->super->tur = "X";
+									bitkiYasiyorMu = 0;
+									printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+									break;
+								}
+								if (bitkiYasiyorMu == 0)
+								{
 									break;
 								}
 							}
+						}
+						if (bitkiYasiyorMu == 0)
+						{
+							break;
 						}
 
 						for (k = 0; k < pireIndex; k++)
@@ -220,10 +252,20 @@ int main()
 								if (!strcmp(durum, "P"))
 								{
 									int yenilecekDeger = pireler[k]->super->super->deger;
-									printf("Pire Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									// printf("Pire Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									pireler[k]->super->super->tur = "X";
+									printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+									break;
+								}
+								if (bitkiYasiyorMu == 0)
+								{
 									break;
 								}
 							}
+						}
+						if (bitkiYasiyorMu == 0)
+						{
+							break;
 						}
 
 						for (k = 0; k < sinekIndex; k++)
@@ -234,10 +276,20 @@ int main()
 								if (!strcmp(durum, "S"))
 								{
 									int yenilecekDeger = sinekler[k]->super->super->deger;
-									printf("Sinek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									// printf("Sinek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									sinekler[k]->super->super->tur = "X";
+									printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+									break;
+								}
+								if (bitkiYasiyorMu == 0)
+								{
 									break;
 								}
 							}
+						}
+						if (bitkiYasiyorMu == 0)
+						{
+							break;
 						}
 					}
 					if (n == 5)
@@ -246,8 +298,6 @@ int main()
 						{
 							int x = m + 1;
 							int y = 0;
-							// printf("yeni satir : m %d n %d -", x, y);
-
 							int xCoord = x;
 							int yCoord = y;
 							for (k = 0; k < bitkiIndex; k++)
@@ -258,10 +308,32 @@ int main()
 									if (!strcmp(durum, "B"))
 									{
 										int yenilecekDeger = bitkiler[k]->super->deger;
-										printf("Bitki Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										// printf("Bitki Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										int ilkDeger = tempBitkiPointer->super->deger;
+										int ikinciDeger = bitkiler[k]->super->deger;
+
+										if (ilkDeger > ikinciDeger)
+										{
+											bitkiler[k]->super->tur = "X";
+											printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+										}
+										else
+										{
+											tempBitkiPointer->super->tur = "X";
+											bitkiYasiyorMu = 0;
+											printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+										}
+										break;
+									}
+									if (bitkiYasiyorMu == 0)
+									{
 										break;
 									}
 								}
+							}
+							if (bitkiYasiyorMu == 0)
+							{
+								break;
 							}
 
 							for (k = 0; k < bocekIndex; k++)
@@ -272,10 +344,21 @@ int main()
 									if (!strcmp(durum, "C"))
 									{
 										int yenilecekDeger = bitkiler[k]->super->deger;
-										printf("Bitki Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										// printf("Bitki Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										tempBitkiPointer->super->tur = "X";
+										bitkiYasiyorMu = 0;
+										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+										break;
+									}
+									if (bitkiYasiyorMu == 0)
+									{
 										break;
 									}
 								}
+							}
+							if (bitkiYasiyorMu == 0)
+							{
+								break;
 							}
 
 							for (k = 0; k < pireIndex; k++)
@@ -286,10 +369,20 @@ int main()
 									if (!strcmp(durum, "P"))
 									{
 										int yenilecekDeger = pireler[k]->super->super->deger;
-										printf("Bitki Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										// printf("Bitki Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										pireler[k]->super->super->tur = "X";
+										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+										break;
+									}
+									if (bitkiYasiyorMu == 0)
+									{
 										break;
 									}
 								}
+							}
+							if (bitkiYasiyorMu == 0)
+							{
+								break;
 							}
 
 							for (k = 0; k < sinekIndex; k++)
@@ -300,10 +393,20 @@ int main()
 									if (!strcmp(durum, "S"))
 									{
 										int yenilecekDeger = sinekler[k]->super->super->deger;
-										printf("Bitki Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										// printf("Bitki Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										sinekler[k]->super->super->tur = "X";
+										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+										break;
+									}
+									if (bitkiYasiyorMu == 0)
+									{
 										break;
 									}
 								}
+							}
+							if (bitkiYasiyorMu == 0)
+							{
+								break;
 							}
 						}
 						icDongu = 1;
@@ -316,13 +419,13 @@ int main()
 				int xKoordinat = tempBocekPointer->super->xCoord;
 				int yKoordinat = tempBocekPointer->super->yCoord;
 				int degeri = tempBocekPointer->super->deger;
-				printf("Bulunan Bocekin durumu: %s Konumu: %d %d degeri: %d \n", durum, xKoordinat, yKoordinat, degeri);
+				// printf("Bulunan Bocekin durumu: %s Konumu: %d %d degeri: %d \n", durum, xKoordinat, yKoordinat, degeri);
 				bulunanBocekMi = 0;
 
 				int bocekYasiyorMu = 0;
 				if (strcmp(durum, "X"))
 				{
-					printf("Bocek Yasiyor\n");
+					// printf("Bocek Yasiyor\n");
 					bocekYasiyorMu = 1;
 				}
 
@@ -331,8 +434,6 @@ int main()
 				{
 					for (n = icDongu; n < 5; n++)
 					{
-						// printf("m %d n %d -", m, n);
-
 						int xCoord = m;
 						int yCoord = n;
 						for (k = 0; k < bitkiIndex; k++)
@@ -343,10 +444,9 @@ int main()
 								if (!strcmp(durum, "B"))
 								{
 									int yenilecekDeger = bitkiler[k]->super->deger;
-									printf("Bitki Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									// printf("Bitki Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
 									bitkiler[k]->super->tur = "X";
 									printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
-
 
 									break;
 								}
@@ -364,19 +464,15 @@ int main()
 
 						for (k = 0; k < bocekIndex; k++)
 						{
-							// printf(">>bocekler[k]->super->xCoord %d xcoord: %d - bocekler[k]->super->yCoord %d ycoord %d\n\n", bocekler[k]->super->xCoord, xCoord, bocekler[k]->super->yCoord, yCoord);
 							if (bocekler[k]->super->xCoord == xCoord && bocekler[k]->super->yCoord == yCoord)
 							{
-
 								char *durum = bocekler[k]->super->tur;
 								if (!strcmp(durum, "C"))
 								{
 									int yenilecekDeger = bocekler[k]->super->deger;
-									printf("Bocek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									// printf("Bocek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
 									int ilkDeger = tempBocekPointer->super->deger;
 									int ikinciDeger = bocekler[k]->super->deger;
-
-									// printf("ilkdeger : %d -- ikincideger %d \n", ilkDeger, ikinciDeger);
 
 									if (ilkDeger > ikinciDeger)
 									{
@@ -386,6 +482,7 @@ int main()
 									else
 									{
 										tempBocekPointer->super->tur = "X";
+										bocekYasiyorMu = 0;
 										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
 									}
 
@@ -406,7 +503,7 @@ int main()
 								if (!strcmp(durum, "P"))
 								{
 									int yenilecekDeger = pireler[k]->super->super->deger;
-									printf("Pire Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									// printf("Pire Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
 									pireler[k]->super->super->tur = "X";
 									printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
 									break;
@@ -426,7 +523,7 @@ int main()
 								if (!strcmp(durum, "S"))
 								{
 									int yenilecekDeger = sinekler[k]->super->super->deger;
-									printf("Sinek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									// printf("Sinek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
 									bocekYasiyorMu = 0;
 									tempBocekPointer->super->tur = "X";
 									printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
@@ -449,8 +546,6 @@ int main()
 						{
 							int x = m + 1;
 							int y = 0;
-							// printf("yeni satir : m %d n %d -", x, y);
-
 							int xCoord = x;
 							int yCoord = y;
 							for (k = 0; k < bitkiIndex; k++)
@@ -461,7 +556,7 @@ int main()
 									if (!strcmp(durum, "B"))
 									{
 										int yenilecekDeger = bitkiler[k]->super->deger;
-										printf("Bitki Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										// printf("Bitki Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
 										break;
 									}
 								}
@@ -479,12 +574,10 @@ int main()
 									if (!strcmp(durum, "C"))
 									{
 										int yenilecekDeger = bocekler[k]->super->deger;
-										printf("Bocek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										// printf("Bocek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+
 										int ilkDeger = tempBocekPointer->super->deger;
 										int ikinciDeger = bocekler[k]->super->deger;
-
-										// printf("ilkdeger : %d -- ikincideger %d \n", ilkDeger, ikinciDeger);
-
 										if (ilkDeger > ikinciDeger)
 										{
 											bocekler[k]->super->tur = "X";
@@ -493,6 +586,7 @@ int main()
 										else
 										{
 											tempBocekPointer->super->tur = "X";
+											bocekYasiyorMu = 0;
 											printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
 										}
 										break;
@@ -512,7 +606,7 @@ int main()
 									if (!strcmp(durum, "P"))
 									{
 										int yenilecekDeger = pireler[k]->super->super->deger;
-										printf("Pire Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										// printf("Pire Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
 										pireler[k]->super->super->tur = "X";
 										break;
 									}
@@ -531,7 +625,7 @@ int main()
 									if (!strcmp(durum, "S"))
 									{
 										int yenilecekDeger = sinekler[k]->super->super->deger;
-										printf("Sinek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										// printf("Sinek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
 										bocekYasiyorMu = 0;
 										tempBocekPointer->super->tur = "X";
 										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
@@ -555,16 +649,21 @@ int main()
 				int yKoordinat = tempPirePointer->super->super->yCoord;
 
 				int degeri = tempPirePointer->super->super->deger;
-				printf("Bulunan Pirenin durumu: %s Konumu: %d %d degeri: %d \n", durum, xKoordinat, yKoordinat, degeri);
+				// printf("Bulunan Pirenin durumu: %s Konumu: %d %d degeri: %d \n", durum, xKoordinat, yKoordinat, degeri);
 				bulunanPireMi = 0;
+
+				int pireYasiyorMu = 0;
+				if (strcmp(durum, "X"))
+				{
+					// printf("Pire Yasiyor\n");
+					pireYasiyorMu = 1;
+				}
 
 				int icDongu = j + 1;
 				for (m = i; m < 4; m++)
 				{
 					for (n = icDongu; n < 5; n++)
 					{
-						// printf("m %d n %d -", m, n);
-
 						int xCoord = m;
 						int yCoord = n;
 						for (k = 0; k < bitkiIndex; k++)
@@ -575,7 +674,14 @@ int main()
 								if (!strcmp(durum, "B"))
 								{
 									int yenilecekDeger = bitkiler[k]->super->deger;
-									printf("Bitki Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									// printf("Bitki Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									pireYasiyorMu = 0;
+									tempPirePointer->super->super->tur = "X";
+									printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+									break;
+								}
+								if (pireYasiyorMu == 0)
+								{
 									break;
 								}
 							}
@@ -589,7 +695,14 @@ int main()
 								if (!strcmp(durum, "C"))
 								{
 									int yenilecekDeger = bocekler[k]->super->deger;
-									printf("Bocek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									// printf("Bocek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									pireYasiyorMu = 0;
+									tempPirePointer->super->super->tur = "X";
+									printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+									break;
+								}
+								if (pireYasiyorMu == 0)
+								{
 									break;
 								}
 							}
@@ -603,7 +716,24 @@ int main()
 								if (!strcmp(durum, "P"))
 								{
 									int yenilecekDeger = pireler[k]->super->super->deger;
-									printf("Pire Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									// printf("Pire Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									int ilkDeger = tempPirePointer->super->super->deger;
+									int ikinciDeger = pireler[k]->super->super->deger;
+									if (ilkDeger > ikinciDeger)
+									{
+										pireler[k]->super->super->tur = "X";
+										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+									}
+									else
+									{
+										tempPirePointer->super->super->tur = "X";
+										pireYasiyorMu = 0;
+										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+									}
+									break;
+								}
+								if (pireYasiyorMu == 0)
+								{
 									break;
 								}
 							}
@@ -617,7 +747,14 @@ int main()
 								if (!strcmp(durum, "S"))
 								{
 									int yenilecekDeger = sinekler[k]->super->super->deger;
-									printf("Sinek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									// printf("Sinek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									tempPirePointer->super->super->tur = "X";
+									pireYasiyorMu = 0;
+									printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+									break;
+								}
+								if (pireYasiyorMu == 0)
+								{
 									break;
 								}
 							}
@@ -629,8 +766,6 @@ int main()
 						{
 							int x = m + 1;
 							int y = 0;
-							// printf("yeni satir : m %d n %d -", x, y);
-
 							int xCoord = x;
 							int yCoord = y;
 							for (k = 0; k < bitkiIndex; k++)
@@ -641,7 +776,14 @@ int main()
 									if (!strcmp(durum, "B"))
 									{
 										int yenilecekDeger = bitkiler[k]->super->deger;
-										printf("Bitki Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										// printf("Bitki Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										pireYasiyorMu = 0;
+										tempPirePointer->super->super->tur = "X";
+										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+										break;
+									}
+									if (pireYasiyorMu == 0)
+									{
 										break;
 									}
 								}
@@ -655,7 +797,14 @@ int main()
 									if (!strcmp(durum, "C"))
 									{
 										int yenilecekDeger = bocekler[k]->super->deger;
-										printf("Bocek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										// printf("Bocek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										pireYasiyorMu = 0;
+										tempPirePointer->super->super->tur = "X";
+										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+										break;
+									}
+									if (pireYasiyorMu == 0)
+									{
 										break;
 									}
 								}
@@ -669,7 +818,24 @@ int main()
 									if (!strcmp(durum, "P"))
 									{
 										int yenilecekDeger = pireler[k]->super->super->deger;
-										printf("Pire Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										// printf("Pire Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										int ilkDeger = tempPirePointer->super->super->deger;
+										int ikinciDeger = pireler[k]->super->super->deger;
+										if (ilkDeger > ikinciDeger)
+										{
+											pireler[k]->super->super->tur = "X";
+											printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+										}
+										else
+										{
+											tempPirePointer->super->super->tur = "X";
+											pireYasiyorMu = 0;
+											printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+										}
+										break;
+									}
+									if (pireYasiyorMu == 0)
+									{
 										break;
 									}
 								}
@@ -683,13 +849,28 @@ int main()
 									if (!strcmp(durum, "S"))
 									{
 										int yenilecekDeger = sinekler[k]->super->super->deger;
-										printf("Sinek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										// printf("Sinek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										tempPirePointer->super->super->tur = "X";
+										pireYasiyorMu = 0;
+										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+										break;
+									}
+									if (pireYasiyorMu == 0)
+									{
 										break;
 									}
 								}
 							}
+							if (pireYasiyorMu == 0)
+							{
+								break;
+							}
 						}
 						icDongu = 1;
+					}
+					if (pireYasiyorMu == 0)
+					{
+						break;
 					}
 				}
 			}
@@ -700,16 +881,21 @@ int main()
 				int yKoordinat = tempSinekPointer->super->super->yCoord;
 
 				int degeri = tempSinekPointer->super->super->deger;
-				printf("Bulunan Sinekin durumu: %s Konumu: %d %d degeri: %d \n", durum, xKoordinat, yKoordinat, degeri);
+				// printf("Bulunan Sinekin durumu: %s Konumu: %d %d degeri: %d \n", durum, xKoordinat, yKoordinat, degeri);
 				bulunanSinekMi = 0;
+
+				int sinekYasiyorMu = 0;
+				if (strcmp(durum, "X"))
+				{
+					// printf("Sinek Yasiyor\n");
+					sinekYasiyorMu = 1;
+				}
 
 				int icDongu = j + 1;
 				for (m = i; m < 4; m++)
 				{
 					for (n = icDongu; n < 5; n++)
 					{
-						// printf("m %d n %d -", m, n);
-
 						int xCoord = m;
 						int yCoord = n;
 						for (k = 0; k < bitkiIndex; k++)
@@ -720,7 +906,14 @@ int main()
 								if (!strcmp(durum, "B"))
 								{
 									int yenilecekDeger = bitkiler[k]->super->deger;
-									printf("Bitki Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									// printf("Bitki Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									tempSinekPointer->super->super->tur = "X";
+									sinekYasiyorMu = 0;
+									printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+									break;
+								}
+								if (sinekYasiyorMu == 0)
+								{
 									break;
 								}
 							}
@@ -734,7 +927,13 @@ int main()
 								if (!strcmp(durum, "C"))
 								{
 									int yenilecekDeger = bocekler[k]->super->deger;
-									printf("Bocek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									// printf("Bocek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									bocekler[k]->super->tur = "X";
+									printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+									break;
+								}
+								if (sinekYasiyorMu == 0)
+								{
 									break;
 								}
 							}
@@ -748,7 +947,13 @@ int main()
 								if (!strcmp(durum, "P"))
 								{
 									int yenilecekDeger = pireler[k]->super->super->deger;
-									printf("Pire Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									// printf("Pire Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									pireler[k]->super->super->tur = "X";
+									printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+									break;
+								}
+								if (sinekYasiyorMu == 0)
+								{
 									break;
 								}
 							}
@@ -762,7 +967,24 @@ int main()
 								if (!strcmp(durum, "S"))
 								{
 									int yenilecekDeger = sinekler[k]->super->super->deger;
-									printf("Sinek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									// printf("Sinek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+									int ilkDeger = tempSinekPointer->super->super->deger;
+									int ikinciDeger = sinekler[k]->super->super->deger;
+									if (ilkDeger > ikinciDeger)
+									{
+										sinekler[k]->super->super->tur = "X";
+										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+									}
+									else
+									{
+										tempSinekPointer->super->super->tur = "X";
+										sinekYasiyorMu = 0;
+										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+									}
+									break;
+								}
+								if (sinekYasiyorMu == 0)
+								{
 									break;
 								}
 							}
@@ -774,8 +996,6 @@ int main()
 						{
 							int x = m + 1;
 							int y = 0;
-							// printf("yeni satir : m %d n %d -", x, y);
-
 							int xCoord = x;
 							int yCoord = y;
 							for (k = 0; k < bitkiIndex; k++)
@@ -786,7 +1006,14 @@ int main()
 									if (!strcmp(durum, "B"))
 									{
 										int yenilecekDeger = bitkiler[k]->super->deger;
-										printf("Bitki Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										// printf("Bitki Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										tempSinekPointer->super->super->tur = "X";
+										sinekYasiyorMu = 0;
+										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+										break;
+									}
+									if (sinekYasiyorMu == 0)
+									{
 										break;
 									}
 								}
@@ -800,7 +1027,13 @@ int main()
 									if (!strcmp(durum, "C"))
 									{
 										int yenilecekDeger = bocekler[k]->super->deger;
-										printf("Bocek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										// printf("Bocek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										bocekler[k]->super->tur = "X";
+										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+										break;
+									}
+									if (sinekYasiyorMu == 0)
+									{
 										break;
 									}
 								}
@@ -814,7 +1047,13 @@ int main()
 									if (!strcmp(durum, "P"))
 									{
 										int yenilecekDeger = pireler[k]->super->super->deger;
-										printf("Pire Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										// printf("Pire Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										pireler[k]->super->super->tur = "X";
+										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+										break;
+									}
+									if (sinekYasiyorMu == 0)
+									{
 										break;
 									}
 								}
@@ -828,7 +1067,24 @@ int main()
 									if (!strcmp(durum, "S"))
 									{
 										int yenilecekDeger = sinekler[k]->super->super->deger;
-										printf("Sinek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										// printf("Sinek Konum %d  %d deger: %d\n", xCoord, yCoord, yenilecekDeger);
+										int ilkDeger = tempSinekPointer->super->super->deger;
+										int ikinciDeger = sinekler[k]->super->super->deger;
+										if (ilkDeger > ikinciDeger)
+										{
+											sinekler[k]->super->super->tur = "X";
+											printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+										}
+										else
+										{
+											tempSinekPointer->super->super->tur = "X";
+											sinekYasiyorMu = 0;
+											printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
+										}
+										break;
+									}
+									if (sinekYasiyorMu == 0)
+									{
 										break;
 									}
 								}
@@ -836,16 +1092,19 @@ int main()
 						}
 						icDongu = 1;
 					}
+					if (sinekYasiyorMu == 0)
+					{
+						break;
+					}
 				}
 			}
 			printf("\n\n");
 		}
 	}
-
 	printf("\n");
-
+	printf("---------SONUC-------\n\n");
 	printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
-
+	findWinner(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler);
 	printf("\n");
 
 	return 0;
