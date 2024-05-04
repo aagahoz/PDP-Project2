@@ -76,3 +76,54 @@ void bellekSerbestBirak(int **matris, int satir_sayisi) {
     }
     free(matris);
 }
+
+void printGrid(int bitkiIndex, int bocekIndex, int pireIndex, int sinekIndex,
+			   Bitki bitkiler[], Bocek bocekler[], Pire pireler[], Sinek sinekler[])
+{
+
+	int i, j, k;
+	for (int i = 0; i < 4; i++)
+	{
+		for (j = 0; j < 5; j++)
+		{
+			int xCoord = i;
+			int yCoord = j;
+			for (k = 0; k < bitkiIndex; k++)
+			{
+				if (bitkiler[k]->super->xCoord == xCoord && bitkiler[k]->super->yCoord == yCoord)
+				{
+					printf("%s ", bitkiler[k]->super->tur);
+					break;
+				}
+			}
+
+			for (k = 0; k < bocekIndex; k++)
+			{
+				if (bocekler[k]->super->xCoord == xCoord && bocekler[k]->super->yCoord == yCoord)
+				{
+					printf("%s ", bocekler[k]->super->tur);
+					break;
+				}
+			}
+
+			for (k = 0; k < pireIndex; k++)
+			{
+				if (pireler[k]->super->super->xCoord == xCoord && pireler[k]->super->super->yCoord == yCoord)
+				{
+					printf("%s ", pireler[k]->super->super->tur);
+					break;
+				}
+			}
+
+			for (k = 0; k < sinekIndex; k++)
+			{
+				if (sinekler[k]->super->super->xCoord == xCoord && sinekler[k]->super->super->yCoord == yCoord)
+				{
+					printf("%s ", sinekler[k]->super->super->tur);
+					break;
+				}
+			}
+		}
+		printf("\n");
+	}
+}
