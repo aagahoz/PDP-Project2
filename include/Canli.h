@@ -1,3 +1,12 @@
+/**
+ * @file  Canlı.h
+ * @description Soyut Sınıf Tasarımı ve Nesne Benzetimi
+ * @course  2.Öğretim B Grubu 
+ * @assignment  2.Ödev
+ * @date   5.5.2024
+ * @author  Abdullah Agah Özdemir - agah.ozdemir@ogr.sakarya.edu.tr
+ */
+
 #ifndef CANLI_H
 #define CANLI_H
 
@@ -7,7 +16,10 @@
 #include "math.h"
 #include "string.h"
 
+#include "Habitat.h"
+
 struct CANLI{
+	Habitat superHabitat;
 	int deger;
 	char* tur;
 	int xCoord;

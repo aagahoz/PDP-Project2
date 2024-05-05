@@ -1,3 +1,12 @@
+/**
+ * @file  Test.c
+ * @description Soyut Sınıf Tasarımı ve Nesne Benzetimi
+ * @course  2.Öğretim B Grubu 
+ * @assignment  2.Ödev
+ * @date   5.5.2024
+ * @author  Abdullah Agah Özdemir - agah.ozdemir@ogr.sakarya.edu.tr
+ */
+
 #include "Bitki.h"
 #include "Bocek.h"
 #include "Sinek.h"
@@ -8,7 +17,7 @@ int main()
 {
 	printf("\n\n\n\n");
 	FILE *dosya;
-	dosya = fopen("src/Veri.txt", "r");
+	dosya = fopen("Veri.txt", "r");
 	if (dosya == NULL)
 	{
 		printf("Veri dosyası bulunamadı veya açılamadı.\n");
@@ -18,13 +27,14 @@ int main()
 	int satir_sayisi = 0;
 	int sutun_sayisi = 0;
 	int **matris = matrisOlustur(dosya, &satir_sayisi, &sutun_sayisi, MAX_SATIR_UZUNLUGU);
+	system("cls");
 	matrisiYazdir(matris, satir_sayisi, sutun_sayisi);
 	fclose(dosya);
 
 	printf("\n");
 
-	Bitki bitkiler[10000];
-	Bocek bocekler[10000];
+	Bitki bitkiler[100000];
+	Bocek bocekler[100000];
 	Sinek sinekler[10000];
 	Pire pireler[10000];
 
@@ -75,6 +85,8 @@ int main()
 	free(matris);
 	printf("---------Ilk Durum---------\n\n");
 	printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
+	system("pause");
+	system("cls");
 	printf("\n");
 
 	int bulunanBocekMi = 0;
@@ -192,17 +204,20 @@ int main()
 									if (ilkDeger > ikinciDeger)
 									{
 										bitkiler[k]->super->tur = "X";
+										system("cls");
 										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 									}
 									else if (ilkDeger == ikinciDeger)
 									{
 										bitkiler[k]->super->tur = "X";
+										system("cls");
 										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 									}
 									else
 									{
 										tempBitkiPointer->super->tur = "X";
 										bitkiYasiyorMu = 0;
+										system("cls");
 										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 									}
 									break;
@@ -228,6 +243,7 @@ int main()
 									int yenilecekDeger = bocekler[k]->super->deger;
 									tempBitkiPointer->super->tur = "X";
 									bitkiYasiyorMu = 0;
+									system("cls");
 									printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 									break;
 								}
@@ -251,6 +267,7 @@ int main()
 								{
 									int yenilecekDeger = pireler[k]->super->super->deger;
 									pireler[k]->super->super->tur = "X";
+									system("cls");
 									printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 									break;
 								}
@@ -274,6 +291,7 @@ int main()
 								{
 									int yenilecekDeger = sinekler[k]->super->super->deger;
 									sinekler[k]->super->super->tur = "X";
+									system("cls");
 									printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 									break;
 								}
@@ -310,17 +328,20 @@ int main()
 										if (ilkDeger > ikinciDeger)
 										{
 											bitkiler[k]->super->tur = "X";
+											system("cls");
 											printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 										}
 										else if (ilkDeger == ikinciDeger)
 										{
 											bitkiler[k]->super->tur = "X";
+											system("cls");
 											printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 										}
 										else
 										{
 											tempBitkiPointer->super->tur = "X";
 											bitkiYasiyorMu = 0;
+											system("cls");
 											printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 										}
 										break;
@@ -346,6 +367,7 @@ int main()
 										int yenilecekDeger = bitkiler[k]->super->deger;
 										tempBitkiPointer->super->tur = "X";
 										bitkiYasiyorMu = 0;
+										system("cls");
 										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 										break;
 									}
@@ -369,6 +391,7 @@ int main()
 									{
 										int yenilecekDeger = pireler[k]->super->super->deger;
 										pireler[k]->super->super->tur = "X";
+										system("cls");
 										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 										break;
 									}
@@ -392,6 +415,7 @@ int main()
 									{
 										int yenilecekDeger = sinekler[k]->super->super->deger;
 										sinekler[k]->super->super->tur = "X";
+										system("cls");
 										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 										break;
 									}
@@ -440,6 +464,7 @@ int main()
 								{
 									int yenilecekDeger = bitkiler[k]->super->deger;
 									bitkiler[k]->super->tur = "X";
+									system("cls");
 									printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 									break;
 								}
@@ -468,17 +493,20 @@ int main()
 									if (ilkDeger > ikinciDeger)
 									{
 										bocekler[k]->super->tur = "X";
+										system("cls");
 										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 									}
 									else if (ilkDeger == ikinciDeger)
 									{
 										bocekler[k]->super->tur = "X";
+										system("cls");
 										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 									}
 									else
 									{
 										tempBocekPointer->super->tur = "X";
 										bocekYasiyorMu = 0;
+										system("cls");
 										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 									}
 									break;
@@ -499,6 +527,7 @@ int main()
 								{
 									int yenilecekDeger = pireler[k]->super->super->deger;
 									pireler[k]->super->super->tur = "X";
+									system("cls");
 									printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 									break;
 								}
@@ -519,6 +548,7 @@ int main()
 									int yenilecekDeger = sinekler[k]->super->super->deger;
 									bocekYasiyorMu = 0;
 									tempBocekPointer->super->tur = "X";
+									system("cls");
 									printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 									break;
 								}
@@ -572,17 +602,20 @@ int main()
 										if (ilkDeger > ikinciDeger)
 										{
 											bocekler[k]->super->tur = "X";
+											system("cls");
 											printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 										}
 										else if (ilkDeger == ikinciDeger)
 										{
 											bocekler[k]->super->tur = "X";
+											system("cls");
 											printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 										}
 										else
 										{
 											tempBocekPointer->super->tur = "X";
 											bocekYasiyorMu = 0;
+											system("cls");
 											printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 										}
 										break;
@@ -622,6 +655,7 @@ int main()
 										int yenilecekDeger = sinekler[k]->super->super->deger;
 										bocekYasiyorMu = 0;
 										tempBocekPointer->super->tur = "X";
+										system("cls");
 										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 										break;
 									}
@@ -668,6 +702,7 @@ int main()
 									int yenilecekDeger = bitkiler[k]->super->deger;
 									pireYasiyorMu = 0;
 									tempPirePointer->super->super->tur = "X";
+									system("cls");
 									printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 									break;
 								}
@@ -688,6 +723,7 @@ int main()
 									int yenilecekDeger = bocekler[k]->super->deger;
 									pireYasiyorMu = 0;
 									tempPirePointer->super->super->tur = "X";
+									system("cls");
 									printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 									break;
 								}
@@ -711,17 +747,20 @@ int main()
 									if (ilkDeger > ikinciDeger)
 									{
 										pireler[k]->super->super->tur = "X";
+										system("cls");
 										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 									}
 									else if (ilkDeger == ikinciDeger)
 									{
 										pireler[k]->super->super->tur = "X";
+										system("cls");
 										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 									}
 									else
 									{
 										tempPirePointer->super->super->tur = "X";
 										pireYasiyorMu = 0;
+										system("cls");
 										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 									}
 									break;
@@ -743,6 +782,7 @@ int main()
 									int yenilecekDeger = sinekler[k]->super->super->deger;
 									tempPirePointer->super->super->tur = "X";
 									pireYasiyorMu = 0;
+									system("cls");
 									printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 									break;
 								}
@@ -771,6 +811,7 @@ int main()
 										int yenilecekDeger = bitkiler[k]->super->deger;
 										pireYasiyorMu = 0;
 										tempPirePointer->super->super->tur = "X";
+										system("cls");
 										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 										break;
 									}
@@ -791,6 +832,7 @@ int main()
 										int yenilecekDeger = bocekler[k]->super->deger;
 										pireYasiyorMu = 0;
 										tempPirePointer->super->super->tur = "X";
+										system("cls");
 										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 										break;
 									}
@@ -814,17 +856,20 @@ int main()
 										if (ilkDeger > ikinciDeger)
 										{
 											pireler[k]->super->super->tur = "X";
+											system("cls");
 											printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 										}
 										else if (ilkDeger == ikinciDeger)
 										{
 											pireler[k]->super->super->tur = "X";
+											system("cls");
 											printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 										}
 										else
 										{
 											tempPirePointer->super->super->tur = "X";
 											pireYasiyorMu = 0;
+											system("cls");
 											printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 										}
 										break;
@@ -846,6 +891,7 @@ int main()
 										int yenilecekDeger = sinekler[k]->super->super->deger;
 										tempPirePointer->super->super->tur = "X";
 										pireYasiyorMu = 0;
+										system("cls");
 										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 										break;
 									}
@@ -900,6 +946,7 @@ int main()
 									int yenilecekDeger = bitkiler[k]->super->deger;
 									tempSinekPointer->super->super->tur = "X";
 									sinekYasiyorMu = 0;
+									system("cls");
 									printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 									break;
 								}
@@ -919,6 +966,7 @@ int main()
 								{
 									int yenilecekDeger = bocekler[k]->super->deger;
 									bocekler[k]->super->tur = "X";
+									system("cls");
 									printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 									break;
 								}
@@ -938,6 +986,7 @@ int main()
 								{
 									int yenilecekDeger = pireler[k]->super->super->deger;
 									pireler[k]->super->super->tur = "X";
+									system("cls");
 									printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 									break;
 								}
@@ -961,17 +1010,20 @@ int main()
 									if (ilkDeger > ikinciDeger)
 									{
 										sinekler[k]->super->super->tur = "X";
+										system("cls");
 										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 									}
 									else if (ilkDeger == ikinciDeger)
 									{
 										sinekler[k]->super->super->tur = "X";
+										system("cls");
 										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 									}
 									else
 									{
 										tempSinekPointer->super->super->tur = "X";
 										sinekYasiyorMu = 0;
+										system("cls");
 										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 									}
 									break;
@@ -1001,6 +1053,7 @@ int main()
 										int yenilecekDeger = bitkiler[k]->super->deger;
 										tempSinekPointer->super->super->tur = "X";
 										sinekYasiyorMu = 0;
+										system("cls");
 										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 										break;
 									}
@@ -1020,6 +1073,7 @@ int main()
 									{
 										int yenilecekDeger = bocekler[k]->super->deger;
 										bocekler[k]->super->tur = "X";
+										system("cls");
 										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 										break;
 									}
@@ -1039,6 +1093,7 @@ int main()
 									{
 										int yenilecekDeger = pireler[k]->super->super->deger;
 										pireler[k]->super->super->tur = "X";
+										system("cls");
 										printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 										break;
 									}
@@ -1062,17 +1117,20 @@ int main()
 										if (ilkDeger > ikinciDeger)
 										{
 											sinekler[k]->super->super->tur = "X";
+											system("cls");
 											printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 										}
 										else if (ilkDeger == ikinciDeger)
 										{
 											sinekler[k]->super->super->tur = "X";
+											system("cls");
 											printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 										}
 										else
 										{
 											tempSinekPointer->super->super->tur = "X";
 											sinekYasiyorMu = 0;
+											system("cls");
 											printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 										}
 										break;
@@ -1097,6 +1155,7 @@ int main()
 	}
 	printf("\n");
 	printf("---------SONUC-------\n\n");
+	system("cls");
 	printGrid(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 	findWinner(bitkiIndex, bocekIndex, pireIndex, sinekIndex, bitkiler, bocekler, pireler, sinekler, satir_sayisi, sutun_sayisi);
 	printf("\n");

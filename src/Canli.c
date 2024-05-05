@@ -1,3 +1,12 @@
+/**
+ * @file  Canli.c
+ * @description Soyut Sınıf Tasarımı ve Nesne Benzetimi
+ * @course  2.Öğretim B Grubu 
+ * @assignment  2.Ödev
+ * @date   5.5.2024
+ * @author  Abdullah Agah Özdemir - agah.ozdemir@ogr.sakarya.edu.tr
+ */
+
 #include "Canli.h"
 
 
@@ -23,10 +32,8 @@ void setTur(const Canli this,char* tur){
 }
 
 char* gorunum(const Canli this,void* p){
-	int toplamUzunluk = 36;
-
-	char* str = (char*)malloc(sizeof(char)*toplamUzunluk+1);
-	sprintf(str,"\n Tur: %s k:(%d, %d)",this->tur, this->xCoord, this->yCoord);
+	char* str = (char*)malloc(sizeof(char)*3);
+	sprintf(str,"%s ",this->tur);
 	return str;
 }
 void CanliYoket(const Canli this){

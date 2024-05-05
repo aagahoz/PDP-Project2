@@ -1,3 +1,12 @@
+/**
+ * @file  kutuphane.c
+ * @description Soyut Sınıf Tasarımı ve Nesne Benzetimi
+ * @course  2.Öğretim B Grubu 
+ * @assignment  2.Ödev
+ * @date   5.5.2024
+ * @author  Abdullah Agah Özdemir - agah.ozdemir@ogr.sakarya.edu.tr
+ */
+
 #include "kutuphane.h"
 
 #include <stdio.h>
@@ -43,7 +52,7 @@ int **matrisOlustur(FILE *dosya, int *satir_sayisi, int *sutun_sayisi, int max_s
 
     while (fgets(satir, max_satir_uzunlugu, dosya) != NULL && satirIndex < *satir_sayisi)
     {
-        char *token = strtok(satir, " "); // Boşluk karakterlerine göre satırı parçala
+        char *token = strtok(satir, " ");
 
         sutunIndex = 0;
         while (token != NULL && sutunIndex < *sutun_sayisi)
@@ -95,7 +104,7 @@ void printGrid(int bitkiIndex, int bocekIndex, int pireIndex, int sinekIndex,
             {
                 if (bitkiler[k]->super->xCoord == xCoord && bitkiler[k]->super->yCoord == yCoord)
                 {
-                    printf("%s ", bitkiler[k]->super->tur);
+                    printf("%s", bitkiler[k]->super->gorunum(bitkiler[k]->super, NULL));
                     break;
                 }
             }
@@ -104,7 +113,7 @@ void printGrid(int bitkiIndex, int bocekIndex, int pireIndex, int sinekIndex,
             {
                 if (bocekler[k]->super->xCoord == xCoord && bocekler[k]->super->yCoord == yCoord)
                 {
-                    printf("%s ", bocekler[k]->super->tur);
+                    printf("%s", bocekler[k]->super->gorunum(bocekler[k]->super, NULL));
                     break;
                 }
             }
@@ -113,7 +122,8 @@ void printGrid(int bitkiIndex, int bocekIndex, int pireIndex, int sinekIndex,
             {
                 if (pireler[k]->super->super->xCoord == xCoord && pireler[k]->super->super->yCoord == yCoord)
                 {
-                    printf("%s ", pireler[k]->super->super->tur);
+                    printf("%s", pireler[k]->super->super->gorunum(pireler[k]->super->super, NULL));
+
                     break;
                 }
             }
@@ -122,7 +132,7 @@ void printGrid(int bitkiIndex, int bocekIndex, int pireIndex, int sinekIndex,
             {
                 if (sinekler[k]->super->super->xCoord == xCoord && sinekler[k]->super->super->yCoord == yCoord)
                 {
-                    printf("%s ", sinekler[k]->super->super->tur);
+                    printf("%s", sinekler[k]->super->super->gorunum(sinekler[k]->super->super, NULL));
                     break;
                 }
             }
@@ -137,8 +147,8 @@ void findWinner(int bitkiIndex, int bocekIndex, int pireIndex, int sinekIndex,
 {
     int xEksen = -1;
     int yEksen = -1;
-    char*  kazananTur;
-    
+    char *kazananTur;
+
     int i, j, k;
     for (int i = 0; i < sutunSayisi; i++)
     {
@@ -156,7 +166,7 @@ void findWinner(int bitkiIndex, int bocekIndex, int pireIndex, int sinekIndex,
                     {
                         xEksen = bitkiler[k]->super->xCoord;
                         yEksen = bitkiler[k]->super->yCoord;
-                        kazananTur =  durum;
+                        kazananTur = durum;
                     }
                     break;
                 }
@@ -171,7 +181,7 @@ void findWinner(int bitkiIndex, int bocekIndex, int pireIndex, int sinekIndex,
                     {
                         xEksen = bocekler[k]->super->xCoord;
                         yEksen = bocekler[k]->super->yCoord;
-                        kazananTur =  durum;
+                        kazananTur = durum;
                     }
                     break;
                 }
@@ -186,7 +196,7 @@ void findWinner(int bitkiIndex, int bocekIndex, int pireIndex, int sinekIndex,
                     {
                         xEksen = pireler[k]->super->super->xCoord;
                         yEksen = pireler[k]->super->super->yCoord;
-                        kazananTur =  durum;
+                        kazananTur = durum;
                     }
                     break;
                 }
@@ -201,7 +211,7 @@ void findWinner(int bitkiIndex, int bocekIndex, int pireIndex, int sinekIndex,
                     {
                         xEksen = sinekler[k]->super->super->xCoord;
                         yEksen = sinekler[k]->super->super->yCoord;
-                        kazananTur =  durum;
+                        kazananTur = durum;
                     }
                     break;
                 }
@@ -209,6 +219,6 @@ void findWinner(int bitkiIndex, int bocekIndex, int pireIndex, int sinekIndex,
         }
         printf("\n");
     }
-    printf("Kazanan: %s : (%d,%d)\n\n",kazananTur, xEksen, yEksen);
+    printf("Kazanan: %s : (%d,%d)\n\n", kazananTur, xEksen, yEksen);
     printf("\n");
 }

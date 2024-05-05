@@ -1,3 +1,12 @@
+/**
+ * @file  kutuphane.h
+ * @description Soyut Sınıf Tasarımı ve Nesne Benzetimi
+ * @course  2.Öğretim B Grubu 
+ * @assignment  2.Ödev
+ * @date   5.5.2024
+ * @author  Abdullah Agah Özdemir - agah.ozdemir@ogr.sakarya.edu.tr
+ */
+
 #ifndef KUTUPHANE_H_
 #define KUTUPHANE_H_
 
@@ -10,7 +19,7 @@
 #include "Sinek.h"
 #include "Pire.h"
 
-#define MAX_SATIR_UZUNLUGU 100000 // Maksimum satır uzunluğu
+#define MAX_SATIR_UZUNLUGU 30000 // Maksimum satır uzunluğu
 
 int **matrisOlustur(FILE *dosya, int *satir_sayisi, int *sutun_sayisi, int max_satir_uzunlugu);
 void matrisiYazdir(int **matris, int satir_sayisi, int sutun_sayisi);
